@@ -1,5 +1,5 @@
-data/batik/
-data/*.zip
+data/
+.venv/
 models/*.h5
 models/*.keras
 __pycache__/
