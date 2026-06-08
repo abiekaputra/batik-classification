@@ -25,7 +25,7 @@ A deep learning project that classifies traditional Indonesian batik fabric patt
 | Data Processing | NumPy, Pandas, PIL                  |
 | Visualization   | Matplotlib, Seaborn, Plotly         |
 | Web App         | Streamlit                           |
-| Dataset         | Kaggle — `aldian/batik-kaggle`      |
+| Dataset         | Kaggle — `dionisiusdh/indonesian-batik-motifs` |
 
 ---
 
@@ -41,13 +41,15 @@ pip install -r requirements.txt
 
 The notebook downloads the dataset automatically via the Kaggle API.
 
-1. Go to [https://www.kaggle.com/settings/account](https://www.kaggle.com/settings/account)
-2. Scroll to **API** section → click **Create New Token**
-3. A file `kaggle.json` will be downloaded
-4. Place it at `~/.kaggle/kaggle.json`
-5. Set permissions:
+1. Go to [https://www.kaggle.com/settings](https://www.kaggle.com/settings)
+2. Scroll to **API** section → click **Generate New Token**
+3. Save the token and set the environment variable:
    ```bash
-   chmod 600 ~/.kaggle/kaggle.json
+   export KAGGLE_API_TOKEN=your_token_here
+   ```
+   Or save it to `~/.kaggle/access_token`:
+   ```bash
+   mkdir -p ~/.kaggle && echo your_token > ~/.kaggle/access_token && chmod 600 ~/.kaggle/access_token
    ```
 
 ---
@@ -79,16 +81,16 @@ Open and run `notebook.ipynb` from top to bottom. It will:
 **Manual dataset download (alternative):**
 
 If you prefer to download manually:
-1. Visit [https://www.kaggle.com/datasets/aldian/batik-kaggle](https://www.kaggle.com/datasets/aldian/batik-kaggle)
+1. Visit [https://www.kaggle.com/datasets/dionisiusdh/indonesian-batik-motifs](https://www.kaggle.com/datasets/dionisiusdh/indonesian-batik-motifs)
 2. Download and extract the zip
-3. Place images in this structure:
+3. Place the class folders directly inside `data/`:
    ```
-   data/batik/
-     ├── parang/
+   data/
+     ├── batik-parang/
      │   ├── image1.jpg
      │   └── ...
-     ├── kawung/
-     ├── megamendung/
+     ├── batik-kawung/
+     ├── batik-megamendung/
      └── ...
    ```
 
@@ -111,13 +113,11 @@ batik-classification/
 ├── requirements.txt        # Python dependencies
 ├── README.md               # Project documentation
 ├── .gitignore
-├── data/
-│   ├── .gitkeep
-│   └── batik/              # Dataset (not tracked by git)
-│       ├── parang/
-│       ├── kawung/
-│       ├── megamendung/
-│       └── ...
+├── data/                   # Dataset (not tracked by git)
+│   ├── batik-parang/
+│   ├── batik-kawung/
+│   ├── batik-megamendung/
+│   └── ...                 # 20 class folders total
 └── models/
     ├── .gitkeep
     ├── batik_model.h5      # Trained model (not tracked by git)
@@ -141,8 +141,9 @@ batik-classification/
 
 ## Dataset
 
-- **Source:** [Kaggle — aldian/batik-kaggle](https://www.kaggle.com/datasets/aldian/batik-kaggle)
-- **Format:** JPEG images organized by class folder
+- **Source:** [Kaggle — dionisiusdh/indonesian-batik-motifs](https://www.kaggle.com/datasets/dionisiusdh/indonesian-batik-motifs) (CC0-1.0)
+- **Classes:** 20 batik patterns — parang, kawung, megamendung, sidomukti, batik-bali, and 15 more
+- **Format:** JPEG images organized by class folder (~50 images/class)
 - **Split:** 80% training / 20% validation (via `ImageDataGenerator`)
 
 ---
@@ -155,4 +156,4 @@ After training and fine-tuning, the model achieves strong classification perform
 
 ## License
 
-MIT License. Dataset credits to the original uploader on Kaggle.
+MIT License. Dataset: [Indonesian Batik Motifs](https://www.kaggle.com/datasets/dionisiusdh/indonesian-batik-motifs) by dionisiusdh, licensed CC0-1.0.
